@@ -36,10 +36,18 @@ const Card: React.FC<GameData> = ({ props }: GameData): JSX.Element => {
           <div className="content flex-wrap">
             <div className="w-fit">
               <h3 className="text-2xl font-semibold max-w-xs">{props.title}</h3>
-              <ul className="flex space-x-2 text-sm text-neutral-400">
-                <li>Action, </li>
-                <li>FPS, </li>
-                <li>Adventure</li>
+              <ul className="flex space-x-2 text-sm text-neutral-400 mt-4">
+                {props.tags.map((tag, index) => {
+                  if(index < props.tags.length - 1) {
+                    return <li className='' key={index}>{tag}, </li>
+                  } else {
+                    return (
+                      <li key={index}>
+                        {tag}
+                      </li>
+                    );
+                  }
+                })}
               </ul>
             </div>
             <hr className="border border-secondary-bg w-28 h-2 bg-secondary-bg mt-4 rounded-full" />

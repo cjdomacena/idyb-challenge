@@ -11,28 +11,47 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   },
 });
 
-export const getSteamGames = async (limit: number): Promise<SteamData[] | null> => {
-  const { data, status, error } = await supabase
-    .from<SteamData>('steam')
-    .select('*')
-    .order('price', { ascending: false })
-    .limit(limit);
-  if (status === 200) {
-    return data;
-  }
-  return null;
-};
+export const getSteamGames = async (limit: number, sortBy?:string): Promise<SteamData[] | null> => {
 
-export const sortSteamGames = async (
-  limit: number,
-  isAscending: false,
-): Promise<SteamData[] | null> => {
-  const { data, status, error } = await supabase
-    .from<SteamData>('steam')
-    .select('*')
-    .order('price', { ascending: isAscending });
-  if (status === 200) {
-    return data;
+  if (sortBy === 'Name A - Z') {
+    const { data, status, error } = await supabase
+      .from<SteamData>('steam')
+      .select('*')
+      .order('title', { ascending: true })
+      .limit(limit);
+    if (status === 200) {
+      return data;
+    }
+     if (error) {
+       alert(error.message);
+     }
+    return null;
+  } else if (sortBy === 'Name Z - A') {
+    const { data, status, error } = await supabase
+      .from<SteamData>('steam')
+      .select('*')
+      .order('title', { ascending: false })
+      .limit(limit);
+    if (status === 200) {
+      return data;
+    } 
+    if(error) {
+      alert(error.message)
+    }
+    return null;
+  } else {
+    const { data, status, error } = await supabase
+      .from<SteamData>('steam')
+      .select('*')
+      .order('price', { ascending: false })
+      .limit(limit);
+    if (status === 200) {
+      return data;
+    }
+     if (error) {
+       alert(error.message);
+     }
+    return null;
   }
-  return null;
+  
 };
