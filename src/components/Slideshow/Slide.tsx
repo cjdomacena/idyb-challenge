@@ -11,7 +11,7 @@ const Slide = (props: Props) => {
     return (
       <img
         src={props.image_url}
-        className={`w-[616px] h-auto rounded-lg opacity-40 scale-90  xl:block lg:block hidden`}
+        className={`w-[616px] h-auto rounded-lg opacity-40 scale-75  xl:block lg:block hidden ease-linear transition-opacity duration-300 `}
         alt={props.alt}
         draggable={false}
       />
@@ -21,7 +21,7 @@ const Slide = (props: Props) => {
     return (
       <img
         src={props.image_url}
-        className={`w-[616px] h-auto rounded-lg opacity-40 scale-90  xl:block lg:block hidden  ease-in-out`}
+        className={`w-[616px] h-auto rounded-lg opacity-40 scale-75  xl:block lg:block hidden ease-linear transition-opacity duration-300`}
         alt={props.alt}
         draggable={false}
       />
@@ -29,7 +29,7 @@ const Slide = (props: Props) => {
   }  return (
     <img
       src={props.image_url}
-      className="w-[616px] h-auto rounded-lg shadow-xl scale-100 "
+      className="w-[616px] h-auto rounded-lg shadow-xl scale-100 ease-linear transition-opacity duration-300"
       alt={props.alt}
       draggable={false}
     />

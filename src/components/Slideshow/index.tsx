@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { useEffect, useRef, useState } from 'react';
+import { Transition } from '@headlessui/react';
+import {  useRef, useState } from 'react';
 import Slide from './Slide';
 
 type Props = {};
@@ -17,21 +18,30 @@ type SlideshowIndex = {
 const Slideshow = (props: Props) => {
   const images: ImageType[] = [
     {
-      image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1569040/capsule_616x353.jpg',
+      image_url:
+        'https://cdn.akamai.steamstatic.com/steam/apps/915810/capsule_616x353.jpg?t=1649315580',
       id: 20,
     },
     {
-      image_url: 'https://cdn.akamai.steamstatic.com/steam/apps/570/capsule_616x353.jpg',
+      image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1569040/capsule_616x353.jpg',
       id: 21,
     },
     {
-      image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1203220/capsule_616x353.jpg',
+      image_url: 'https://cdn.akamai.steamstatic.com/steam/apps/570/capsule_616x353.jpg',
       id: 22,
+    },
+    {
+      image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1203220/capsule_616x353.jpg',
+      id: 23,
     },
     {
       image_url:
         'https://cdn.akamai.steamstatic.com/steam/apps/915810/capsule_616x353.jpg?t=1649315580',
-      id: 23,
+      id: 24,
+    },
+    {
+      image_url: 'https://cdn.akamai.steamstatic.com/steam/apps/570/capsule_616x353.jpg',
+      id: 25,
     },
   ];
   const [slideEndIndex, setSlideEndIndex] = useState<number>(1);
@@ -45,9 +55,7 @@ const Slideshow = (props: Props) => {
 
   const displaySlides = () => {
     return currentSlides?.map((image, index) => (
-      <div key={image.id}>
-        <Slide position={getSlidePosition(index)} image_url={image.image_url} />
-      </div>
+        <Slide position={getSlidePosition(index)} image_url={image.image_url}  key={image.id}/>
     ));
   };
 
@@ -60,6 +68,7 @@ const Slideshow = (props: Props) => {
       return 'right';
     }
   };
+  
 
   const handleClickNextSlide = () => {
     let tempIndex = slideEndIndex;
@@ -104,21 +113,22 @@ const Slideshow = (props: Props) => {
 
   return (
     <div className="text-white relative w-full mt-[23px]">
-      <div className="w-1/2 absolute h-full bg-[#4D6E95]/30 rounded-full blur-3xl mx-auto -top-2 right-0 left-0 z-0"></div>
+      <div className="w-1/2 absolute h-full bg-[#4D6E95]/30 rounded-full blur-3xl mx-auto -top-2 right-0 left-0 z-0 "></div>
       <div
-        className="flex justify-evenly w-screen relative items-center mx-auto space overflow-hidden space-x-24 z-20"
+        className="flex justify-evenly container relative items-center mx-auto overflow-hidden z-20 gap-x-24"
         ref={middleRef}>
         {currentSlides ? displaySlides() : null}
       </div>
 
       <div className="space-x-4 w-fit mx-auto mt-12 z-50 absolute left-0 right-0 h-fit">
-        {[0, 1, 2, 3].map((value) => (
+        {[0, 1, 2, 3,4,5].map((value) => (
           <button
             key={value}
-            className={`w-3 h-3 shadow border rounded-full ${value === activeIndex ? "bg-white" : null}`}
+            className={`w-3 h-3 shadow border rounded-full ${
+              value === activeIndex ? 'bg-white' : null
+            }`}
             onClick={() => handleMoveSlide(value)}></button>
         ))}
-        
       </div>
     </div>
   );
