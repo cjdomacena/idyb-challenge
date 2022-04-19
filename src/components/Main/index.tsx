@@ -1,6 +1,7 @@
 import React, {  useRef, useState } from 'react'
 import TitleBar from './TitleBar';
 import {ChevronDownIcon} from '@heroicons/react/solid'
+import Card from '../Card';
 
 type Props = {}
 
@@ -11,12 +12,12 @@ const Main = (props: Props) => {
   const selectRef = useRef<HTMLSelectElement>(null)
 
   return (
-    <section className="container mt-24 mx-auto p-4">
+    <section className="container mt-24 mx-auto p-4 ">
       <TitleBar />
       <div className="w-full mt-8 flex justify-between flex-wrap gap-4">
         <div className="xl:ml-14 lg:ml-14 ml-0 xl:w-fit lg:w-fit md:w-fit w-full text-white ">
           <input
-            className="xl:w-[273px] lg:w-[273px] w-full rounded-full bg-secondary-bg p-2 ml-2 placeholder-[#8c9ca9] px-4 focus:ring-blue-300 focus:ring focus:outline-none placeholder:font-semibold appearance-none"
+            className="xl:w-[273px] lg:w-[273px] w-full rounded-full bg-secondary-bg p-2 xl:ml-2 lg:ml-2 ml-0 placeholder-[#8c9ca9] px-4 focus:ring-blue-300 focus:ring focus:outline-none placeholder:font-semibold appearance-none"
             placeholder="Search"
           />
         </div>
@@ -41,6 +42,10 @@ const Main = (props: Props) => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="w-full mt-8 space-y-8">
+        <Card />
+        <Card />
       </div>
     </section>
   );
