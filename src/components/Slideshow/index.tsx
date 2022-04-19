@@ -115,12 +115,12 @@ const Slideshow = (props: Props) => {
     <div className="text-white relative w-full mt-[23px]">
       <div className="w-1/2 absolute h-full bg-[#4D6E95]/30 rounded-full blur-3xl mx-auto -top-2 right-0 left-0 z-0 "></div>
       <div
-        className="flex justify-evenly container relative items-center mx-auto overflow-hidden z-20 gap-x-24"
+        className="flex justify-evenly w-screen relative items-center mx-auto overflow-hidden z-20 gap-x-36"
         ref={middleRef}>
         {currentSlides ? displaySlides() : null}
       </div>
 
-      <div className="space-x-4 w-fit mx-auto mt-12 z-50 absolute left-0 right-0 h-fit">
+      <div className="space-x-4 w-fit mx-auto mt-8 z-50 absolute left-0 right-0 h-fit">
         {[0, 1, 2, 3,4,5].map((value) => (
           <button
             key={value}

@@ -1,4 +1,5 @@
 import React from 'react';
+import Main from './components/Main';
 import Navbar from './components/Navbar';
 import Slideshow from './components/Slideshow';
 
@@ -7,6 +8,7 @@ function App() {
     <div className="App">
       <Navbar />
       <Slideshow />
+      <Main />
     </div>
   );
 }

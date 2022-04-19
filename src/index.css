@@ -6,4 +6,5 @@
 html {
 	@apply bg-primary-bg;
 	font-family: 'Noto Sans Display', sans-serif;
+	box-sizing: border-box;
 }
