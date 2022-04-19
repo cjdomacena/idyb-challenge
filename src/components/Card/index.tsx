@@ -1,5 +1,6 @@
 import React from 'react'
 import {FaLinux, FaWindows, FaApple, FaQuestion} from 'react-icons/fa'
+import { Link } from 'react-router-dom';
 import { SteamData } from '../../interface';
 
 interface GameData{
@@ -35,17 +36,19 @@ const Card: React.FC<GameData> = ({ props }: GameData): JSX.Element => {
         <div className="xl:px-20 lg:px-12  p-4 w-full xl:flex lg:flex md:flex block justify-between flex-wrap ">
           <div className="content flex-wrap">
             <div className="w-fit">
-              <h3 className="text-2xl font-semibold max-w-xs">{props.title}</h3>
+              <a href={props.link} target="_blank" rel='noopener noreferrer' className='hover:text-white/80 transition-colors'>
+                <h3 className="text-2xl font-semibold max-w-xs">{props.title}</h3>
+              </a>
               <ul className="flex space-x-2 text-sm text-neutral-400 mt-4">
                 {props.tags.map((tag, index) => {
-                  if(index < props.tags.length - 1) {
-                    return <li className='' key={index}>{tag}, </li>
-                  } else {
+                  if (index < props.tags.length - 1) {
                     return (
-                      <li key={index}>
-                        {tag}
+                      <li className="" key={index}>
+                        {tag},{' '}
                       </li>
                     );
+                  } else {
+                    return <li key={index}>{tag}</li>;
                   }
                 })}
               </ul>
