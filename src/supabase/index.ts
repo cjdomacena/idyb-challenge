@@ -11,11 +11,28 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   },
 });
 
-export const getSteamGames = async (limit:number): Promise<SteamData[] | null> => {
+export const getSteamGames = async (limit: number): Promise<SteamData[] | null> => {
+  const { data, status, error } = await supabase
+    .from<SteamData>('steam')
+    .select('*')
+    .order('price', { ascending: false })
+    .limit(limit);
+  if (status === 200) {
+    return data;
+  }
+  return null;
+};
 
-  const {data, status, error} = await supabase.from<SteamData>('steam').select('*').limit(limit);
-  if(status === 200) {
-    return data
-  } 
-  return null
-}
+export const sortSteamGames = async (
+  limit: number,
+  isAscending: false,
+): Promise<SteamData[] | null> => {
+  const { data, status, error } = await supabase
+    .from<SteamData>('steam')
+    .select('*')
+    .order('price', { ascending: isAscending });
+  if (status === 200) {
+    return data;
+  }
+  return null;
+};
