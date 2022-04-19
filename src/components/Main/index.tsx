@@ -14,38 +14,34 @@ const Main = (props: Props) => {
     threshold: 1
   });
   const [sort, setSort] = useState<string>("Price");
+  const [limit,setLimit] = useState<number>(5);
   const OPTIONS:string[] = ["Price", "Name"];
   const selectRef = useRef<HTMLSelectElement>(null);
   const { data, isFetching, isError, isFetched, fetchNextPage, isRefetching } = useInfiniteQuery<
     SteamData[] | null,
     Error
-  >(['list'], async ({ pageParam = 5 }) => await getSteamGames(pageParam), {
+  >('list', async ({ pageParam = 5 }) => await getSteamGames(pageParam), {
     staleTime: 1000 * 60,
     refetchOnWindowFocus: true,
-    getNextPageParam: (lastPage, allPages) => {
-      const nextPage = lastPage?.length  ?? 5
-      return nextPage + 5;
-    },
   });
 
   const [currentList, setCurrentList] = useState<
     null | undefined | InfiniteData<SteamData[] | null>
   >(null);
  
-
+  useEffect(() => {
+        if (isFetched && limit === 5) {
+          setCurrentList(data);
+        }
+  },[data, isFetched, limit])
 
   useEffect(() => {
-    if(isFetched) {
-      setCurrentList(data);
+    if (inView) {
+        fetchNextPage({ pageParam: limit + 5 });
+        setCurrentList(data);
+        setLimit((prev) => prev + 5);
     }
-  }, [data, isFetched]);
-
-  useEffect(() => {
-      if(inView) {
-        fetchNextPage();
-        setCurrentList(data)
-      }
-  }, [data, fetchNextPage, inView])
+  }, [inView, isFetched, isFetching]);
 
 
 
@@ -96,7 +92,7 @@ const Main = (props: Props) => {
         </div>
       </section>
       <div className="mx-auto w-fit my-6">
-        <div className="mt-12" ref={ref}>
+        <div className="mt-12" ref={currentList ? ref : null}>
           <svg
             className="animate-spin -ml-1 mr-3 h-6 w-6 text-white"
             xmlns="http://www.w3.org/2000/svg"
