@@ -1,45 +1,41 @@
 import React from 'react'
 import {FaLinux, FaWindows, FaApple, FaQuestion} from 'react-icons/fa'
+import { SteamData } from '../../interface';
 
-type Props = {
-title: string,
-image_url: string,
-genres: string[],
-price: number,
-platform: string,
+interface GameData{
+  props: SteamData
 }
 
-const Card = () => {
 
-
-
-  const platformSvg = (platform:string) => {
-    switch(platform){
-      case 'Windows': 
+const Card: React.FC<GameData> = ({ props }: GameData): JSX.Element => {
+  const platformSvg = (platform: string) => {
+    switch (platform) {
+      case 'Windows':
         return <FaWindows className="w-10 h-10 text-secondary-bg" />;
-      case 'Apple': 
+      case 'Apple':
         return <FaApple className="w-10 h-10 text-secondary-bg" />;
-      case 'Linux': 
-       return <FaLinux className="w-10 h-10 text-secondary-bg" />;
-      default: 
+      case 'Linux':
+        return <FaLinux className="w-10 h-10 text-secondary-bg" />;
+      default:
         return <FaQuestion className="w-10 h-10 text-secondary-bg" />;
     }
-  }
+  };
 
   return (
-    <div className="w-full flex text-white rounded-lg xl:flex-nowrap lg:flex-nowrap md:flex-nowrap flex-wrap">
-      <div className="xl:ml-14 lg:ml-14 ml-0">
+    <div className="w-full flex text-white rounded-lg xl:flex-nowrap lg:flex-nowrap  flex-wrap min-h-[245px]">
+      <div className="xl:ml-14 lg:ml-14 ml-0 xl:max-w-[600px] lg:max-w-[600px] w-full  h-[245px]">
         <img
-          src="https://cdn.akamai.steamstatic.com/steam/apps/915810/capsule_616x353.jpg?t=1649315580"
+          src={props.image}
           alt="something"
-          className=" rounded-tl-lg rounded-bl-lg"
+          className=" rounded-tl-lg rounded-bl-lg h-[245px] w-full object-cover 
+          object-center"
         />
       </div>
-      <div className="w-full bg-[#17202d] rounded-r-lg grid place-items-center ">
-        <div className="xl:px-20 lg:px-20 md:px-12  p-4 w-full xl:flex lg:flex md:flex block justify-between flex-wrap ">
+      <div className="flex-grow bg-[#17202d] rounded-r-lg grid place-items-center ">
+        <div className="xl:px-20 lg:px-12  p-4 w-full xl:flex lg:flex md:flex block justify-between flex-wrap ">
           <div className="content flex-wrap">
             <div className="w-fit">
-              <h3 className="text-2xl font-semibold">Shadow Warrior 3</h3>
+              <h3 className="text-2xl font-semibold max-w-xs">{props.title}</h3>
               <ul className="flex space-x-2 text-sm text-neutral-400">
                 <li>Action, </li>
                 <li>FPS, </li>
@@ -49,16 +45,18 @@ const Card = () => {
             <hr className="border border-secondary-bg w-28 h-2 bg-secondary-bg mt-4 rounded-full" />
           </div>
 
-          <div className="text-center xl:mt-0 lg:mt-0  mt-4 relative  justify-between items-center xl:block lg:block flex xl:w-fit lg:w-fit w-full">
-            {platformSvg('Linux')}
-            <div className="xl:absolute lg:absolute block -bottom-12 right-0">
-              <h2 className="xl:text-4xl lg:text-4xl text-[40px] font-bold whitespace-nowrap">$ 29.00</h2>
+          <div className="text-center xl:mt-0  mt-4 relative  justify-between items-center xl:block flex xl:w-fit w-full">
+            {platformSvg(props.platforms[0])}
+            <div className="xl:absolute block -bottom-12 right-0">
+              <h2 className="xl:text-4xl lg:text-4xl text-[40px] font-bold whitespace-nowrap">
+                $ {props.price}
+              </h2>
             </div>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Card;

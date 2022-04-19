@@ -8,3 +8,11 @@ export interface SteamData {
   platforms: string[];
   genre: string;
 }
+ 
+export interface IInfiniteQuery {
+  nextCursor: number | undefined,
+  page: {
+    games: SteamData[],
+    hasMore: boolean
+  }
+}
