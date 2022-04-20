@@ -57,7 +57,7 @@ const SearchInput: React.FC = (props: Props) => {
         ) : null}
       </div>
       {searchResults && debouncedSearchTerm.length > 1 ? (
-        <div className="h-auto xl:ml-16 lg:ml-16 ml-0 mt-2  absolute top-10  w-full space-y-2  p-2  rounded z-50 overflow-y-auto bg-primary-bg shadow-xl border border-white/30">
+        <div className="h-auto mt-2  absolute top-10  w-full space-y-2  p-2  rounded z-50 overflow-y-auto bg-primary-bg shadow-xl border border-white/30">
           {isRefetching && query.length > 1 ? (
             <h1 className="text-white p-4 animate-pulse">Searching</h1>
           ) : null}
