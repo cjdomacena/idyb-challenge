@@ -40,7 +40,7 @@ const SearchInput: React.FC = (props: Props) => {
 
   return (
     <div className=" xl:w-fit lg:w-fit md:w-fit w-full">
-      <div className="xl:ml-14 lg:ml-14 ml-0 xl:w-fit lg:w-fit md:w-fit w-full text-white relative">
+      <div className="xl:w-fit lg:w-fit md:w-fit w-full text-white relative">
         <input
           type="text"
           className="xl:w-[273px] lg:w-[273px] w-full rounded-full bg-secondary-bg p-2 xl:ml-2 lg:ml-2 ml-0 placeholder-[#8c9ca9] px-4 focus:ring-blue-300 focus:ring focus:outline-none placeholder:font-semibold appearance-none"

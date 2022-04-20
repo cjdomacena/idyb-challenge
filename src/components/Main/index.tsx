@@ -18,7 +18,7 @@ const Main = (props: Props) => {
   const [limit,setLimit] = useState<number>(5);
   const OPTIONS:string[] = ["Price", "Name A - Z", "Name Z - A"];
 
-  const { data, isFetching, isError, isFetched, fetchNextPage, isRefetching } = useInfiniteQuery<
+  const { data, isFetching, isError, isFetched, fetchNextPage } = useInfiniteQuery<
     SteamData[] | null,
     Error
   >(["initialList", sort], async ({pageParam = 5 }) => await getSteamGames(pageParam, sort), {
@@ -44,7 +44,7 @@ const Main = (props: Props) => {
         setLimit((prev) => prev + 5);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, fetchNextPage, inView, isFetched, isFetching, sort]);
+  }, [inView]);
 
 
 
@@ -56,8 +56,8 @@ const Main = (props: Props) => {
       <section className="container mx-auto p-4 ">
         <TitleBar />
         <div className="w-full mt-8 flex justify-between flex-wrap gap-4 relative">
-        <SearchInput />
-          <div className="xl:ml-14 lg:ml-14 ml-0 xl:w-fit lg:w-fit md:w-fit w-full text-white  ">
+          <SearchInput />
+          <div className=" xl:w-fit lg:w-fit md:w-fit w-full text-white  ">
             <div className="flex items-center relative">
               <span className="mr-4 whitespace-nowrap">Sort By:</span>
               <div className="bg-secondary-bg rounded-full px-2 focus:ring-blue-300 focus:ring focus:outline-none placeholder:font-semibold xl:w-[273px] lg:w-[273px] w-full">
@@ -80,9 +80,8 @@ const Main = (props: Props) => {
           </div>
         </div>
         <div className="w-full mt-8 space-y-8">
-          
           {isFetching ? (
-            <div className='space-y-8'>
+            <div className="space-y-8">
               <LoadingCard />
               <LoadingCard />
               <LoadingCard />
@@ -95,7 +94,6 @@ const Main = (props: Props) => {
                 <Card props={item} key={index} />
               ))
             : null}
-          {isRefetching && !isFetching ? <LoadingCard /> : null}
         </div>
       </section>
       <div className="mx-auto w-fit my-6">

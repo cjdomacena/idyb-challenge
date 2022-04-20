@@ -22,51 +22,29 @@ const Card: React.FC<GameData> = ({ props }: GameData): JSX.Element => {
   };
 
   return (
-    <div className="w-full flex text-white rounded-lg xl:flex-nowrap lg:flex-nowrap  flex-wrap min-h-[245px]">
-      <div className="xl:ml-14 lg:ml-14 ml-0 xl:max-w-[600px] lg:max-w-[600px] w-full  h-[245px]">
-        <img
-          src={props.image}
-          alt="something"
-          className=" rounded-tl-lg rounded-bl-lg h-[245px] w-full object-cover 
-          object-center"
-        />
-      </div>
-      <div className="flex-grow bg-[#17202d] rounded-r-lg grid place-items-center ">
-        <div className="xl:px-20 lg:px-12  p-4 w-full xl:flex lg:flex md:flex block justify-between flex-wrap ">
-          <div className="content flex-wrap">
-            <div className="w-fit">
-              <a href={props.link} target="_blank" rel='noopener noreferrer' className='hover:text-white/80 transition-colors'>
-                <h3 className="text-2xl font-semibold max-w-xs">{props.title}</h3>
-              </a>
-              <ul className="flex space-x-2 text-sm text-neutral-400 mt-4">
-                {props.tags.map((tag, index) => {
-
-                    if (index < props.tags.length - 1) {
-                      return (
-                        <li className="" key={index}>
-                          {tag},{' '}
-                        </li>
-                      );
-                    } else {
-                      return <li key={index}>{tag}</li>;
-                    }
-                  
-                  })
-                }
-              </ul>
-            </div>
-            <hr className="border border-secondary-bg w-28 h-2 bg-secondary-bg mt-4 rounded-full" />
-          </div>
-
-          <div className="text-center xl:mt-0  mt-4 relative  justify-between items-center xl:block flex xl:w-fit w-full">
-            {platformSvg(props.platforms[0])}
-            <div className="xl:absolute block -bottom-12 right-0">
-              <h2 className="xl:text-4xl lg:text-4xl text-[40px] font-bold whitespace-nowrap">
-                $ {props.price}
-              </h2>
-            </div>
-          </div>
+    <div className="w-full flex text-white xl:flex-nowrap lg:flex-nowrap flex-wrap items-center bg-[#17202D] rounded-lg relative">
+      <img
+        src={props.image}
+        alt="something"
+        className="xl:rounded-tl-lg xl:rounded-bl-lg lg:rounded-tl-lg lg:rounded-bl-lg md:rounded-t-lg sm:rounded-t-lg xs:rounded-t-lg h-[245px] xl:rounded-tr-none lg:rounded-tr-none
+          xl:w-auto lg:w-auto w-full object-center object-cover"
+      />
+      <div className="w-full px-4 py-8 flex justify-between mx-2 flex-wrap gap-4">
+        <div className="w-[450px]">
+          <h1 className="text-2xl font-bold leading-loose">{props.title}</h1>
+          <ul className="flex flex-wrap gap-1 text-sm text-neutral-300">
+            {props.tags.map((tag, index) => {
+              if (index < props.tags.length - 1) {
+                return <li key={tag}>{tag}, </li>;
+              } else {
+                return <li key={tag}>{tag}</li>;
+              }
+            })}
+          </ul>
+          <hr className="mt-2 border-2 rounded-full border-secondary-bg w-24" />
         </div>
+          <p className="text-white">{platformSvg(props.platforms[0])}</p>
+        <p className="text-3xl font-black absolute bottom-8 right-6">$ {props.price.toFixed(2)}</p>
       </div>
     </div>
   );
