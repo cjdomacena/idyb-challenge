@@ -6,6 +6,7 @@ import { InfiniteData, useInfiniteQuery} from 'react-query'
 import { getSteamGames } from '../../supabase';
 import { useInView } from 'react-intersection-observer';
 import LoadingCard from '../Card/LoadingCard';
+import SearchInput from '../Search';
 
 type Props = {}
 
@@ -38,7 +39,7 @@ const Main = (props: Props) => {
   },[data, isFetched, limit])
 
   useEffect(() => {
-    if (inView && limit < 25) {
+    if (inView) {
         fetchNextPage({ pageParam: limit + 5 });
         setLimit((prev) => prev + 5);
     }
@@ -51,16 +52,11 @@ const Main = (props: Props) => {
     return <h1>Ooops... Something went wrong</h1>;
   }
   return (
-    <main className="mt-12">
+    <main className="mt-24">
       <section className="container mx-auto p-4 ">
         <TitleBar />
-        <div className="w-full mt-8 flex justify-between flex-wrap gap-4">
-          <div className="xl:ml-14 lg:ml-14 ml-0 xl:w-fit lg:w-fit md:w-fit w-full text-white ">
-            <input
-              className="xl:w-[273px] lg:w-[273px] w-full rounded-full bg-secondary-bg p-2 xl:ml-2 lg:ml-2 ml-0 placeholder-[#8c9ca9] px-4 focus:ring-blue-300 focus:ring focus:outline-none placeholder:font-semibold appearance-none"
-              placeholder="Search"
-            />
-          </div>
+        <div className="w-full mt-8 flex justify-between flex-wrap gap-4 relative">
+        <SearchInput />
           <div className="xl:ml-14 lg:ml-14 ml-0 xl:w-fit lg:w-fit md:w-fit w-full text-white  ">
             <div className="flex items-center relative">
               <span className="mr-4 whitespace-nowrap">Sort By:</span>

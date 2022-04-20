@@ -8,7 +8,7 @@ export default function useDebounce(value:string, delay:number) {
     }, delay);
 			return () => clearTimeout(timeout);
 	
-	},[value])
+	},[delay, value])
 
 	return debounceValue;
 }

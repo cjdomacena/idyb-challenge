@@ -55,3 +55,22 @@ export const getSteamGames = async (limit: number, sortBy?:string): Promise<Stea
   }
   
 };
+
+
+export const getQueriedGames = async(q:string) =>  {
+  if(q.length > 0) {
+    const { data, status, error } = await supabase
+      .from<SteamData>('steam')
+      .select('*')
+      .textSearch('title', q, {
+        type: 'plain',
+      });
+    if (status === 200) {
+      return data;
+    }
+    if (error) {
+      return null;
+    }
+  }
+  return null;
+}

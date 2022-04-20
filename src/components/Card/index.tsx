@@ -41,16 +41,19 @@ const Card: React.FC<GameData> = ({ props }: GameData): JSX.Element => {
               </a>
               <ul className="flex space-x-2 text-sm text-neutral-400 mt-4">
                 {props.tags.map((tag, index) => {
-                  if (index < props.tags.length - 1) {
-                    return (
-                      <li className="" key={index}>
-                        {tag},{' '}
-                      </li>
-                    );
-                  } else {
-                    return <li key={index}>{tag}</li>;
-                  }
-                })}
+
+                    if (index < props.tags.length - 1) {
+                      return (
+                        <li className="" key={index}>
+                          {tag},{' '}
+                        </li>
+                      );
+                    } else {
+                      return <li key={index}>{tag}</li>;
+                    }
+                  
+                  })
+                }
               </ul>
             </div>
             <hr className="border border-secondary-bg w-28 h-2 bg-secondary-bg mt-4 rounded-full" />
