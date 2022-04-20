@@ -1,6 +1,5 @@
 import React from 'react'
 import {FaLinux, FaWindows, FaApple, FaQuestion} from 'react-icons/fa'
-import { Link } from 'react-router-dom';
 import { SteamData } from '../../interface';
 
 interface GameData{
